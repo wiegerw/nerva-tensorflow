@@ -11,7 +11,7 @@ from nerva_tensorflow.datasets import DataLoader, create_npz_dataloaders
 from nerva_tensorflow.loss_functions import *
 from nerva_tensorflow.multilayer_perceptron import MultilayerPerceptron, parse_multilayer_perceptron
 from nerva_tensorflow.loss_functions import parse_loss_function
-from nerva_tensorflow.utilities import pp, set_numpy_options, set_tensorflow_options, StopWatch
+from nerva_tensorflow.utilities import StopWatch, pp, set_numpy_options, set_tensorflow_options
 
 class SGDOptions(object):
     debug=False

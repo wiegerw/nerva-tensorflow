@@ -4,7 +4,7 @@
 
 import tensorflow as tf
 from nerva_tensorflow.activation_functions import Sigmoid
-from nerva_tensorflow.matrix_operations import column_repeat, dot, elements_sum, hadamard, log, reciprocal, rows_sum
+from nerva_tensorflow.matrix_operations import column_repeat, dot, elements_sum, hadamard, log, log_sigmoid, reciprocal, rows_sum
 from nerva_tensorflow.softmax_functions import log_softmax, softmax, stable_log_softmax, stable_softmax
 
 
@@ -115,7 +115,7 @@ def Stable_softmax_cross_entropy_loss_gradient_one_hot(Y, T):
 
 
 def logistic_cross_entropy_loss(y, t):
-    return -dot(t, log(Sigmoid(y)))
+    return -dot(t, log_sigmoid(y))
 
 
 def logistic_cross_entropy_loss_gradient(y, t):
@@ -123,7 +123,7 @@ def logistic_cross_entropy_loss_gradient(y, t):
 
 
 def Logistic_cross_entropy_loss(Y, T):
-    return -elements_sum(hadamard(T, log(Sigmoid(Y))))
+    return -elements_sum(hadamard(T, log_sigmoid(Y)))
 
 
 def Logistic_cross_entropy_loss_gradient(Y, T):

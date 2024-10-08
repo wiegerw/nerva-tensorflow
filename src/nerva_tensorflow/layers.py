@@ -5,8 +5,7 @@
 import tensorflow as tf
 
 from nerva_tensorflow.activation_functions import ActivationFunction, SReLUActivation, parse_activation
-from nerva_tensorflow.matrix_operations import column_repeat, columns_mean, columns_sum, diag, elements_sum, \
-    hadamard, \
+from nerva_tensorflow.matrix_operations import column_repeat, columns_mean, columns_sum, diag, elements_sum, hadamard, \
     identity, ones, inv_sqrt, row_repeat, rows_sum, vector_size, zeros
 from nerva_tensorflow.optimizers import CompositeOptimizer, parse_optimizer
 from nerva_tensorflow.softmax_functions import log_softmax, softmax

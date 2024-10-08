@@ -13,8 +13,31 @@ import tensorflow as tf
 
 
 def to_one_hot(x: tf.Tensor, n_classes: int):
+    """
+    Converts a tensor of class indices to a one-hot encoded tensor.
+
+    Args:
+        x (torch.LongTensor): Tensor of class indices.
+        num_classes (int): Number of classes.
+
+    Returns:
+        torch.Tensor: One-hot encoded tensor of shape (len(x), num_classes).
+    """
     one_hot = tf.one_hot(x, n_classes, dtype=tf.float32, axis=1)
     return one_hot
+
+
+def from_one_hot(one_hot: tf.Tensor) -> tf.Tensor:
+    """
+    Converts a one-hot encoded tensor back to a tensor of class indices.
+
+    Args:
+        one_hot (tf.Tensor): One-hot encoded tensor of shape (N, num_classes).
+
+    Returns:
+        tf.Tensor: Tensor of class indices of shape (N,).
+    """
+    return tf.argmax(one_hot, axis=1, output_type=tf.int64)
 
 
 class MemoryDataLoader(object):
