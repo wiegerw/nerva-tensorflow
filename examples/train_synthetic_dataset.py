@@ -4,21 +4,18 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
-import os
 from typing import List, Tuple
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-import tensorflow as tf
 import sklearn.datasets as dt
+import torch
+from nerva_torch.activation_functions import ReLUActivation
+from nerva_torch.datasets import MemoryDataLoader
+from nerva_torch.layers import ActivationLayer, LinearLayer
+from nerva_torch.learning_rate import MultiStepLRScheduler
+from nerva_torch.loss_functions import SoftmaxCrossEntropyLossFunction
+from nerva_torch.multilayer_perceptron import MultilayerPerceptron
+from nerva_torch.training import sgd
 
-from nerva_tensorflow.activation_functions import ReLUActivation
-from nerva_tensorflow.datasets import MemoryDataLoader
-from nerva_tensorflow.layers import ActivationLayer
-from nerva_tensorflow.learning_rate import MultiStepLRScheduler
-from nerva_tensorflow.loss_functions import SoftmaxCrossEntropyLossFunction
-from nerva_tensorflow.multilayer_perceptron import MultilayerPerceptron
-from nerva_tensorflow.training import sgd
-from nerva_tensorflow.layers import LinearLayer
 
 def generate_synthetic_dataset(num_train_samples, num_test_samples, num_features, num_classes, num_redundant=2, class_sep=0.8, random_state=None):
     X, T = dt.make_classification(
@@ -34,10 +31,10 @@ def generate_synthetic_dataset(num_train_samples, num_test_samples, num_features
     # Split the dataset into a training and test set
     train_batch = range(0, num_train_samples)
     test_batch = range(num_train_samples, num_train_samples + num_test_samples)
-    Xtrain = tf.convert_to_tensor(X[train_batch], dtype=tf.float32)
-    Ttrain = tf.convert_to_tensor(T[train_batch], dtype=tf.int64)
-    Xtest = tf.convert_to_tensor(X[test_batch], dtype=tf.float32)
-    Ttest = tf.convert_to_tensor(T[test_batch], dtype=tf.int64)
+    Xtrain = torch.Tensor(X[train_batch])
+    Ttrain = torch.LongTensor(T[train_batch])
+    Xtest = torch.Tensor(X[test_batch])
+    Ttest = torch.LongTensor(T[test_batch])
     return Xtrain, Ttrain, Xtest, Ttest
 
 
