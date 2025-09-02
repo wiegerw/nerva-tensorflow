@@ -66,6 +66,8 @@ def stable_log_softmax_jacobian(x: Matrix) -> Matrix:
 
 
 class SoftmaxFunction(object):
+    """Callable implementing row-wise softmax and its Jacobian."""
+
     def __call__(self, X: Matrix) -> Matrix:
         return softmax(X)
 
@@ -74,6 +76,8 @@ class SoftmaxFunction(object):
 
 
 class StableSoftmaxFunction(object):
+    """Callable implementing numerically stable row-wise softmax and its Jacobian."""
+
     def __call__(self, X: Matrix) -> Matrix:
         return stable_softmax(X)
 
@@ -82,6 +86,8 @@ class StableSoftmaxFunction(object):
 
 
 class LogSoftmaxFunction(object):
+    """Callable implementing row-wise log-softmax and its Jacobian."""
+
     def __call__(self, X: Matrix) -> Matrix:
         return log_softmax(X)
 
@@ -90,6 +96,8 @@ class LogSoftmaxFunction(object):
 
 
 class StableLogSoftmaxFunction(object):
+    """Callable implementing numerically stable row-wise log-softmax and its Jacobian."""
+
     def __call__(self, X: Matrix) -> Matrix:
         return stable_log_softmax(X)
 
