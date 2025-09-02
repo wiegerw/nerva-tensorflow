@@ -92,6 +92,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_tensorflow.learning_rate</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_learning_rate</span><span class="p">,</span> <span class="n">LearningRateScheduler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_tensorflow.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">create_npz_dataloaders</span><span class="p">,</span> <span class="n">to_one_hot</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_tensorflow.loss_functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_loss_function</span><span class="p">,</span> <span class="n">LossFunction</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_tensorflow.matrix_operations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Matrix</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_tensorflow.multilayer_perceptron</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultilayerPerceptron</span><span class="p">,</span> <span class="n">parse_multilayer_perceptron</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">nerva_tensorflow.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">StopWatch</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">set_numpy_options</span><span class="p">,</span> <span class="n">set_tensorflow_options</span>
 
@@ -163,7 +164,7 @@
 <a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.training.html#nerva_tensorflow.training.print_batch_debug_info">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">print_batch_debug_info</span><span class="p">(</span><span class="n">epoch</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">batch_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
                            <span class="n">M</span><span class="p">:</span> <span class="n">MultilayerPerceptron</span><span class="p">,</span>
-                           <span class="n">X</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Y</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">DY</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+                           <span class="n">X</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Y</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">DY</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Print detailed debug information for a training batch.&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s1"> batch: </span><span class="si">{</span><span class="n">batch_idx</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">M</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -241,8 +242,8 @@
 <div class="viewcode-block" id="stochastic_gradient_descent_plain">
 <a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.training.html#nerva_tensorflow.training.stochastic_gradient_descent_plain">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">stochastic_gradient_descent_plain</span><span class="p">(</span><span class="n">M</span><span class="p">:</span> <span class="n">MultilayerPerceptron</span><span class="p">,</span>
-                                      <span class="n">Xtrain</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
-                                      <span class="n">Ttrain</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+                                      <span class="n">Xtrain</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span>
+                                      <span class="n">Ttrain</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span>
                                       <span class="n">loss</span><span class="p">:</span> <span class="n">LossFunction</span><span class="p">,</span>
                                       <span class="n">learning_rate</span><span class="p">:</span> <span class="n">LearningRateScheduler</span><span class="p">,</span>
                                       <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
