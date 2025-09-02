@@ -2,27 +2,29 @@
 # Distributed under the Boost Software License, Version 1.0.
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
-import os
+"""Miscellaneous utilities (formatting, timing, parsing, I/O)."""
+
 import re
 import time
 from typing import Dict
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import numpy as np
 import tensorflow as tf
 
 
 def set_numpy_options():
+    """Configure NumPy print options for readable output."""
     np.set_printoptions(precision=8, edgeitems=3, threshold=5, suppress=True, linewidth=160)
 
 
 def set_tensorflow_options():
     # N.B. Tensorflow doesn't support print options
+    """Configure PyTorch print options and multiprocessing strategy."""
     import numpy as np
     np.set_printoptions(precision=8, edgeitems=3, threshold=5, suppress=False, linewidth=160)
 
 
 def pp(name: str, x: tf.Tensor):
+    """Pretty-print a tensor with name and shape info."""
     shape = tf.shape(x).numpy()
     if tf.rank(x) == 1:
         print(f'{name} ({shape[0]})\n{x.numpy()}')
@@ -35,10 +37,12 @@ class StopWatch(object):
         self.start = time.perf_counter()
 
     def seconds(self):
+        """Get elapsed time in seconds since creation or last reset."""
         end = time.perf_counter()
         return end - self.start
 
     def reset(self):
+        """Reset the timer to the current time."""
         self.start = time.perf_counter()
 
 
@@ -48,6 +52,7 @@ class FunctionCall:
         self.arguments = arguments
 
     def has_key(self, key: str) -> bool:
+        """Check if the given key exists in parsed arguments."""
         return key in self.arguments
 
     def get_value(self, key: str) -> str:
@@ -122,11 +127,17 @@ def parse_function_call(text: str) -> FunctionCall:
     error()
 
 
-def load_dict_from_npz(filename: str) -> Dict[str, np.ndarray]:
+def load_dict_from_npz(filename: str) -> Dict[str, tf.Tensor]:
     """
     Loads a dictionary from a file in .npz format
     :param filename: a file name
-    :return: a dictionary
+    :return: a dictionary with TensorFlow tensors
     """
+    def make_tensor(x: np.ndarray) -> tf.Tensor:
+        if np.issubdtype(x.dtype, np.integer):
+            return tf.convert_to_tensor(x, dtype=tf.int64)
+        return tf.convert_to_tensor(x, dtype=tf.float32)
 
-    return dict(np.load(filename, allow_pickle=True))
+    data = dict(np.load(filename, allow_pickle=True))
+    data = {key: make_tensor(value) for key, value in data.items()}
+    return data

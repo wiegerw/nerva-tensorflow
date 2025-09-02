@@ -5,31 +5,29 @@
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
 from pathlib import Path
-
-import torch
-
-from nerva_torch.activation_functions import ActivationFunction, \
-    HyperbolicTangentActivation
-from nerva_torch.datasets import create_npz_dataloaders
-from nerva_torch.layers import ActivationLayer, LinearLayer
-from nerva_torch.learning_rate import TimeBasedScheduler
-from nerva_torch.loss_functions import LossFunction
-from nerva_torch.matrix_operations import elements_sum
-from nerva_torch.multilayer_perceptron import MultilayerPerceptron
-from nerva_torch.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
-from nerva_torch.training import sgd
-from nerva_torch.weight_initializers import set_bias_to_zero, set_weights_xavier_normalized
-
-Matrix = torch.Tensor
+import tensorflow as tf
+from nerva_tensorflow.activation_functions import ActivationFunction, HyperbolicTangentActivation
+from nerva_tensorflow.datasets import create_npz_dataloaders
+from nerva_tensorflow.layers import ActivationLayer, LinearLayer
+from nerva_tensorflow.learning_rate import TimeBasedScheduler
+from nerva_tensorflow.loss_functions import LossFunction
+from nerva_tensorflow.matrix_operations import elements_sum, Matrix
+from nerva_tensorflow.multilayer_perceptron import MultilayerPerceptron
+from nerva_tensorflow.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
+from nerva_tensorflow.training import stochastic_gradient_descent
+from nerva_tensorflow.weight_initializers import set_bias_to_zero, set_weights_xavier_normalized
 
 
-# Define a custom activation function
+# ------------------------
+# Custom activation function
+# ------------------------
+
 def Elu(alpha):
-    return lambda X: torch.where(X > 0, X, alpha * (torch.exp(X) - 1))
+    return lambda X: tf.where(X > 0, X, alpha * (tf.exp(X) - 1))
 
 
 def Elu_gradient(alpha):
-    return lambda X: torch.where(X > 0, torch.ones_like(X), alpha * torch.exp(X))
+    return lambda X: tf.where(X > 0, tf.ones_like(X), alpha * tf.exp(X))
 
 
 class ELUActivation(ActivationFunction):
@@ -43,20 +41,26 @@ class ELUActivation(ActivationFunction):
         return Elu_gradient(self.alpha)(X)
 
 
-# Define a custom weight initializer
+# ------------------------
+# Custom weight initializer
+# ------------------------
+
 def set_weights_lecun(W: Matrix):
     K, D = W.shape
-    stddev = torch.sqrt(torch.tensor(1.0 / D))
-    W.data = torch.randn(K, D) * stddev
+    stddev = tf.sqrt(tf.constant(1.0 / D, dtype=tf.float32))
+    W.assign(tf.random.normal((K, D), stddev=stddev))
 
 
-# Define a custom loss function
+# ------------------------
+# Custom loss function
+# ------------------------
+
 class AbsoluteErrorLossFunction(LossFunction):
     def __call__(self, Y: Matrix, T: Matrix) -> float:
-        return elements_sum(abs(Y - T))
+        return tf.reduce_sum(tf.abs(Y - T)).numpy()
 
     def gradient(self, Y: Matrix, T: Matrix) -> Matrix:
-        return torch.sign(Y - T)
+        return tf.sign(Y - T)
 
 
 def main():
@@ -93,9 +97,9 @@ def main():
 
     learning_rate = TimeBasedScheduler(lr=0.1, decay=0.09)
 
-    epochs = 100
+    epochs = 5
 
-    sgd(M, epochs, loss, learning_rate, train_loader, test_loader)
+    stochastic_gradient_descent(M, epochs, loss, learning_rate, train_loader, test_loader)
 
 
 if __name__ == '__main__':

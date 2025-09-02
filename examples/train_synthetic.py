@@ -7,14 +7,14 @@
 from typing import List, Tuple
 
 import sklearn.datasets as dt
-import torch
-from nerva_torch.activation_functions import ReLUActivation
-from nerva_torch.datasets import MemoryDataLoader
-from nerva_torch.layers import ActivationLayer, LinearLayer
-from nerva_torch.learning_rate import MultiStepLRScheduler
-from nerva_torch.loss_functions import SoftmaxCrossEntropyLossFunction
-from nerva_torch.multilayer_perceptron import MultilayerPerceptron
-from nerva_torch.training import sgd
+import tensorflow as tf
+from nerva_tensorflow.activation_functions import ReLUActivation
+from nerva_tensorflow.datasets import MemoryDataLoader
+from nerva_tensorflow.layers import ActivationLayer, LinearLayer
+from nerva_tensorflow.learning_rate import MultiStepLRScheduler
+from nerva_tensorflow.loss_functions import SoftmaxCrossEntropyLossFunction
+from nerva_tensorflow.multilayer_perceptron import MultilayerPerceptron
+from nerva_tensorflow.training import stochastic_gradient_descent
 
 
 def generate_synthetic_dataset(num_train_samples, num_test_samples, num_features, num_classes, num_redundant=2, class_sep=0.8, random_state=None):
@@ -31,10 +31,10 @@ def generate_synthetic_dataset(num_train_samples, num_test_samples, num_features
     # Split the dataset into a training and test set
     train_batch = range(0, num_train_samples)
     test_batch = range(num_train_samples, num_train_samples + num_test_samples)
-    Xtrain = torch.Tensor(X[train_batch])
-    Ttrain = torch.LongTensor(T[train_batch])
-    Xtest = torch.Tensor(X[test_batch])
-    Ttest = torch.LongTensor(T[test_batch])
+    Xtrain = tf.convert_to_tensor(X[train_batch], dtype=tf.float32)
+    Ttrain = tf.convert_to_tensor(T[train_batch], dtype=tf.int64)
+    Xtest = tf.convert_to_tensor(X[test_batch], dtype=tf.float32)
+    Ttest = tf.convert_to_tensor(T[test_batch], dtype=tf.int64)
     return Xtrain, Ttrain, Xtest, Ttest
 
 
@@ -66,9 +66,9 @@ def main():
 
     M = create_mlp([(num_features, 200), (200, 200), (200, num_classes)])
     loss = SoftmaxCrossEntropyLossFunction()
-    epochs = 20
+    epochs = 5
     learning_rate = MultiStepLRScheduler(lr=0.1, milestones=[10, 15], gamma=0.3)
-    sgd(M, epochs, loss, learning_rate, train_loader, test_loader)
+    stochastic_gradient_descent(M, epochs, loss, learning_rate, train_loader, test_loader)
 
 
 if __name__ == '__main__':
