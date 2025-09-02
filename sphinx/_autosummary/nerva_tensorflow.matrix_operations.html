@@ -19,8 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="nerva_tensorflow.softmax_functions" href="nerva_tensorflow.softmax_functions.html" />
-    <link rel="prev" title="nerva_tensorflow.learning_rate" href="nerva_tensorflow.learning_rate.html" /> 
+    <link rel="next" title="nerva_tensorflow.multilayer_perceptron" href="nerva_tensorflow.multilayer_perceptron.html" />
+    <link rel="prev" title="nerva_tensorflow.loss_functions" href="nerva_tensorflow.loss_functions.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,7 +44,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.html">nerva_tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.activation_functions.html">nerva_tensorflow.activation_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.datasets.html">nerva_tensorflow.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.layers.html">nerva_tensorflow.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.learning_rate.html">nerva_tensorflow.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.loss_functions.html">nerva_tensorflow.loss_functions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_tensorflow.matrix_operations</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_tensorflow.matrix_operations.is_vector"><code class="docutils literal notranslate"><span class="pre">is_vector()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_tensorflow.matrix_operations.is_column_vector"><code class="docutils literal notranslate"><span class="pre">is_column_vector()</span></code></a></li>
@@ -78,7 +82,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#nerva_tensorflow.matrix_operations.log_sigmoid"><code class="docutils literal notranslate"><span class="pre">log_sigmoid()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.multilayer_perceptron.html">nerva_tensorflow.multilayer_perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.optimizers.html">nerva_tensorflow.optimizers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.softmax_functions.html">nerva_tensorflow.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.training.html">nerva_tensorflow.training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.utilities.html">nerva_tensorflow.utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.weight_initializers.html">nerva_tensorflow.weight_initializers</a></li>
 </ul>
 
@@ -96,6 +104,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="nerva_tensorflow.html">nerva_tensorflow</a></li>
       <li class="breadcrumb-item active">nerva_tensorflow.matrix_operations</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/_autosummary/nerva_tensorflow.matrix_operations.rst.txt" rel="nofollow"> View page source</a>
@@ -208,72 +217,32 @@ They operate on 1D/2D tensors and keep broadcasting explicit for clarity.</p>
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.is_vector">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#is_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.is_vector" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#is_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.is_vector" title="Link to this definition"></a></dt>
 <dd><p>Check if x is a 1D tensor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.is_column_vector">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_column_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#is_column_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.is_column_vector" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_column_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#is_column_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.is_column_vector" title="Link to this definition"></a></dt>
 <dd><p>Check if x can be treated as a column vector.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.is_row_vector">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_row_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#is_row_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.is_row_vector" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_row_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#is_row_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.is_row_vector" title="Link to this definition"></a></dt>
 <dd><p>Check if x can be treated as a row vector.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.vector_size">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">vector_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#vector_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.vector_size" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">vector_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#vector_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.vector_size" title="Link to this definition"></a></dt>
 <dd><p>Get size along first dimension.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.is_square">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#is_square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.is_square" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">is_square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#is_square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.is_square" title="Link to this definition"></a></dt>
 <dd><p>Check if X is a square matrix.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>bool</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -284,347 +253,146 @@ They operate on 1D/2D tensors and keep broadcasting explicit for clarity.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.zeros">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tensorflow.float32</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#zeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.zeros" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tensorflow.float32</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#zeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.zeros" title="Link to this definition"></a></dt>
 <dd><p>Returns an mxn matrix with all elements equal to 0.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>m</strong> (<em>int</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.ones">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">ones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tensorflow.float32</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#ones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.ones" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">ones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tensorflow.float32</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#ones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.ones" title="Link to this definition"></a></dt>
 <dd><p>Returns an mxn matrix with all elements equal to 1.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>m</strong> (<em>int</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.identity">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tensorflow.float32</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#identity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.identity" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">tensorflow.float32</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#identity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.identity" title="Link to this definition"></a></dt>
 <dd><p>Returns the nxn identity matrix.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>n</strong> (<em>int</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.product">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.product" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.product" title="Link to this definition"></a></dt>
 <dd><p>Matrix multiplication X &#64; Y.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p></li>
-<li><p><strong>Y</strong> (<em>tensorflow.Tensor</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.hadamard">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">hadamard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#hadamard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.hadamard" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">hadamard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#hadamard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.hadamard" title="Link to this definition"></a></dt>
 <dd><p>Element-wise product X ⊙ Y.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p></li>
-<li><p><strong>Y</strong> (<em>tensorflow.Tensor</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.diag">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.diag" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.diag" title="Link to this definition"></a></dt>
 <dd><p>Extract diagonal of X as a vector.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.Diag">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">Diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#Diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.Diag" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">Diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#Diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.Diag" title="Link to this definition"></a></dt>
 <dd><p>Create diagonal matrix with x as diagonal.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.elements_sum">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">elements_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#elements_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.elements_sum" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">elements_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#elements_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.elements_sum" title="Link to this definition"></a></dt>
 <dd><p>Returns the sum of the elements of X.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.column_repeat">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">column_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#column_repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.column_repeat" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">column_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#column_repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.column_repeat" title="Link to this definition"></a></dt>
 <dd><p>Repeat column vector x horizontally n times.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p></li>
-<li><p><strong>n</strong> (<em>int</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.row_repeat">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">row_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#row_repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.row_repeat" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">row_repeat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#row_repeat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.row_repeat" title="Link to this definition"></a></dt>
 <dd><p>Repeat row vector x vertically m times.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p></li>
-<li><p><strong>m</strong> (<em>int</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.columns_sum">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">columns_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#columns_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.columns_sum" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">columns_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#columns_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.columns_sum" title="Link to this definition"></a></dt>
 <dd><p>Sum over columns (returns row vector).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.rows_sum">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">rows_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#rows_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.rows_sum" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">rows_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#rows_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.rows_sum" title="Link to this definition"></a></dt>
 <dd><p>Sum over rows (returns column vector).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.columns_max">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">columns_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#columns_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.columns_max" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">columns_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#columns_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.columns_max" title="Link to this definition"></a></dt>
 <dd><p>Returns a column vector with the maximum values of each row in X.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.rows_max">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">rows_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#rows_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.rows_max" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">rows_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#rows_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.rows_max" title="Link to this definition"></a></dt>
 <dd><p>Returns a row vector with the maximum values of each column in X.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.columns_mean">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">columns_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#columns_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.columns_mean" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">columns_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#columns_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.columns_mean" title="Link to this definition"></a></dt>
 <dd><p>Returns a column vector with the mean values of each row in X.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.rows_mean">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">rows_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#rows_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.rows_mean" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">rows_mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#rows_mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.rows_mean" title="Link to this definition"></a></dt>
 <dd><p>Returns a row vector with the mean values of each column in X.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.apply">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.apply" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.apply" title="Link to this definition"></a></dt>
 <dd><p>Element-wise application of function f to X.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.exp">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#exp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.exp" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#exp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.exp" title="Link to this definition"></a></dt>
 <dd><p>Element-wise exponential exp(X).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.log">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.log" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.log" title="Link to this definition"></a></dt>
 <dd><p>Element-wise natural logarithm log(X).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.reciprocal">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">reciprocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#reciprocal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.reciprocal" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">reciprocal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#reciprocal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.reciprocal" title="Link to this definition"></a></dt>
 <dd><p>Element-wise reciprocal 1/X.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.square">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.square" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">square</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#square"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.square" title="Link to this definition"></a></dt>
 <dd><p>Element-wise square X².</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.sqrt">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.sqrt" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.sqrt" title="Link to this definition"></a></dt>
 <dd><p>Element-wise square root √X.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.inv_sqrt">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">inv_sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#inv_sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.inv_sqrt" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">inv_sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#inv_sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.inv_sqrt" title="Link to this definition"></a></dt>
 <dd><p>Element-wise inverse square root X^(-1/2) with epsilon for stability.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.matrix_operations.log_sigmoid">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">log_sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#log_sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.log_sigmoid" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.matrix_operations.</span></span><span class="sig-name descname"><span class="pre">log_sigmoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/matrix_operations.html#log_sigmoid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.matrix_operations.log_sigmoid" title="Link to this definition"></a></dt>
 <dd><p>Element-wise log(sigmoid(X)) computed stably.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tensorflow.Tensor</p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
@@ -633,8 +401,8 @@ They operate on 1D/2D tensors and keep broadcasting explicit for clarity.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="nerva_tensorflow.learning_rate.html" class="btn btn-neutral float-left" title="nerva_tensorflow.learning_rate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="nerva_tensorflow.softmax_functions.html" class="btn btn-neutral float-right" title="nerva_tensorflow.softmax_functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="nerva_tensorflow.loss_functions.html" class="btn btn-neutral float-left" title="nerva_tensorflow.loss_functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_tensorflow.multilayer_perceptron.html" class="btn btn-neutral float-right" title="nerva_tensorflow.multilayer_perceptron" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -43,9 +43,17 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.html">nerva_tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.activation_functions.html">nerva_tensorflow.activation_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.datasets.html">nerva_tensorflow.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.layers.html">nerva_tensorflow.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.learning_rate.html">nerva_tensorflow.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.loss_functions.html">nerva_tensorflow.loss_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.matrix_operations.html">nerva_tensorflow.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.multilayer_perceptron.html">nerva_tensorflow.multilayer_perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.optimizers.html">nerva_tensorflow.optimizers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.softmax_functions.html">nerva_tensorflow.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.training.html">nerva_tensorflow.training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.utilities.html">nerva_tensorflow.utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_autosummary/nerva_tensorflow.weight_initializers.html">nerva_tensorflow.weight_initializers</a></li>
 </ul>
 
@@ -92,14 +100,38 @@ sphinx-build<span class="w"> </span>-b<span class="w"> </span>html<span class="w
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.html#module-nerva_tensorflow" title="nerva_tensorflow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow</span></code></a></p></td>
 <td><p>nerva_tensorflow: Minimal neural network components built on top of TensorFlow.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.learning_rate.html#module-nerva_tensorflow.learning_rate" title="nerva_tensorflow.learning_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.learning_rate</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.activation_functions.html#module-nerva_tensorflow.activation_functions" title="nerva_tensorflow.activation_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.activation_functions</span></code></a></p></td>
+<td><p>Activation functions and utilities used by the MLP implementation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.datasets.html#module-nerva_tensorflow.datasets" title="nerva_tensorflow.datasets"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.datasets</span></code></a></p></td>
+<td><p>In-memory data loader helpers and one-hot conversions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.layers.html#module-nerva_tensorflow.layers" title="nerva_tensorflow.layers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.layers</span></code></a></p></td>
+<td><p>Neural network layers used by the MultilayerPerceptron class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.learning_rate.html#module-nerva_tensorflow.learning_rate" title="nerva_tensorflow.learning_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.learning_rate</span></code></a></p></td>
 <td><p>Learning-rate schedulers.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.loss_functions.html#module-nerva_tensorflow.loss_functions" title="nerva_tensorflow.loss_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.loss_functions</span></code></a></p></td>
+<td><p>Analytic loss functions and their gradients used during training.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.matrix_operations.html#module-nerva_tensorflow.matrix_operations" title="nerva_tensorflow.matrix_operations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.matrix_operations</span></code></a></p></td>
 <td><p>Matrix operations built on top of TensorFlow to support the math in the library.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.multilayer_perceptron.html#module-nerva_tensorflow.multilayer_perceptron" title="nerva_tensorflow.multilayer_perceptron"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.multilayer_perceptron</span></code></a></p></td>
+<td><p>A simple multilayer perceptron (MLP) class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.optimizers.html#module-nerva_tensorflow.optimizers" title="nerva_tensorflow.optimizers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.optimizers</span></code></a></p></td>
+<td><p>Optimizers used to adjusts the model's parameters based on the gradients.</p></td>
+</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.softmax_functions.html#module-nerva_tensorflow.softmax_functions" title="nerva_tensorflow.softmax_functions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.softmax_functions</span></code></a></p></td>
 <td><p>Softmax and log-softmax functions together with stable variants.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.training.html#module-nerva_tensorflow.training" title="nerva_tensorflow.training"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.training</span></code></a></p></td>
+<td><p>Training helpers for the MLP, including a basic SGD loop and CLI glue.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.utilities.html#module-nerva_tensorflow.utilities" title="nerva_tensorflow.utilities"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.utilities</span></code></a></p></td>
+<td><p>Miscellaneous utilities (formatting, timing, parsing, I/O).</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/nerva_tensorflow.weight_initializers.html#module-nerva_tensorflow.weight_initializers" title="nerva_tensorflow.weight_initializers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nerva_tensorflow.weight_initializers</span></code></a></p></td>
 <td><p>Weight and bias initialization helpers for linear layers.</p></td>

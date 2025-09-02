@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="nerva_tensorflow.softmax_functions" href="nerva_tensorflow.softmax_functions.html" /> 
+    <link rel="prev" title="nerva_tensorflow.utilities" href="nerva_tensorflow.utilities.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,9 +43,17 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.html">nerva_tensorflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.activation_functions.html">nerva_tensorflow.activation_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.datasets.html">nerva_tensorflow.datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.layers.html">nerva_tensorflow.layers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.learning_rate.html">nerva_tensorflow.learning_rate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.loss_functions.html">nerva_tensorflow.loss_functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.matrix_operations.html">nerva_tensorflow.matrix_operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.multilayer_perceptron.html">nerva_tensorflow.multilayer_perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.optimizers.html">nerva_tensorflow.optimizers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.softmax_functions.html">nerva_tensorflow.softmax_functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.training.html">nerva_tensorflow.training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nerva_tensorflow.utilities.html">nerva_tensorflow.utilities</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">nerva_tensorflow.weight_initializers</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_tensorflow.weight_initializers.set_bias_to_zero"><code class="docutils literal notranslate"><span class="pre">set_bias_to_zero()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#nerva_tensorflow.weight_initializers.set_weights_xavier"><code class="docutils literal notranslate"><span class="pre">set_weights_xavier()</span></code></a></li>
@@ -73,6 +81,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="nerva_tensorflow.html">nerva_tensorflow</a></li>
       <li class="breadcrumb-item active">nerva_tensorflow.weight_initializers</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/_autosummary/nerva_tensorflow.weight_initializers.rst.txt" rel="nofollow"> View page source</a>
@@ -117,90 +126,50 @@
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.weight_initializers.set_bias_to_zero">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_bias_to_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_bias_to_zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_bias_to_zero" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_bias_to_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_bias_to_zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_bias_to_zero" title="Link to this definition"></a></dt>
 <dd><p>Set all bias values to zero.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>b</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.weight_initializers.set_weights_xavier">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_weights_xavier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_weights_xavier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_weights_xavier" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_weights_xavier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_weights_xavier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_weights_xavier" title="Link to this definition"></a></dt>
 <dd><p>Initialize weights using Xavier/Glorot initialization.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>W</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.weight_initializers.set_bias_xavier">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_bias_xavier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_bias_xavier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_bias_xavier" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_bias_xavier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_bias_xavier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_bias_xavier" title="Link to this definition"></a></dt>
 <dd><p>Set bias to zero (Xavier scheme for bias).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>b</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.weight_initializers.set_weights_xavier_normalized">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_weights_xavier_normalized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_weights_xavier_normalized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_weights_xavier_normalized" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_weights_xavier_normalized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_weights_xavier_normalized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_weights_xavier_normalized" title="Link to this definition"></a></dt>
 <dd><p>Initialize weights using normalized Xavier initialization.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>W</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.weight_initializers.set_bias_xavier_normalized">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_bias_xavier_normalized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_bias_xavier_normalized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_bias_xavier_normalized" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_bias_xavier_normalized</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_bias_xavier_normalized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_bias_xavier_normalized" title="Link to this definition"></a></dt>
 <dd><p>Set bias to zero (normalized Xavier scheme).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>b</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.weight_initializers.set_weights_he">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_weights_he</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_weights_he"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_weights_he" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_weights_he</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_weights_he"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_weights_he" title="Link to this definition"></a></dt>
 <dd><p>Initialize weights using He initialization for ReLU networks.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>W</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.weight_initializers.set_bias_he">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_bias_he</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_bias_he"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_bias_he" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_bias_he</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_bias_he"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_bias_he" title="Link to this definition"></a></dt>
 <dd><p>Set bias to zero (He scheme for bias).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>b</strong> (<em>tensorflow.Tensor</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.weight_initializers.set_layer_weights">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_layer_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_layer_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_layer_weights" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.weight_initializers.</span></span><span class="sig-name descname"><span class="pre">set_layer_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/weight_initializers.html#set_layer_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.weight_initializers.set_layer_weights" title="Link to this definition"></a></dt>
 <dd><p>Initialize a layer’s parameters according to a named scheme.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>text</strong> (<em>str</em>)</p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>
@@ -209,7 +178,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="nerva_tensorflow.softmax_functions.html" class="btn btn-neutral float-left" title="nerva_tensorflow.softmax_functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="nerva_tensorflow.utilities.html" class="btn btn-neutral float-left" title="nerva_tensorflow.utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

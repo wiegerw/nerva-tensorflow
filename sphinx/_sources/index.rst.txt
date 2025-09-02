@@ -1,5 +1,5 @@
 nerva_tensorflow documentation
-==============================
+=========================
 
 A tiny, educational set of neural network components built on TensorFlow.
 
@@ -18,6 +18,7 @@ API reference
 
 .. autosummary::
    :toctree: _autosummary
+   :recursive:
 
    nerva_tensorflow
    nerva_tensorflow.activation_functions

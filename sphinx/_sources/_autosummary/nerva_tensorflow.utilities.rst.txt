@@ -1,0 +1,23 @@
+nerva\_tensorflow.utilities
+===========================
+
+.. automodule:: nerva_tensorflow.utilities
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      load_dict_from_npz
+      parse_function_call
+      pp
+      set_numpy_options
+      set_tensorflow_options
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      FunctionCall
+      StopWatch
+   

@@ -1,4 +1,4 @@
-﻿nerva\_tensorflow.learning\_rate
+nerva\_tensorflow.learning\_rate
 ================================
 
 .. automodule:: nerva_tensorflow.learning_rate

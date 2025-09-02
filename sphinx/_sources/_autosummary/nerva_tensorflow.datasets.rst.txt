@@ -1,0 +1,23 @@
+nerva\_tensorflow.datasets
+==========================
+
+.. automodule:: nerva_tensorflow.datasets
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      create_npz_dataloaders
+      from_one_hot
+      infer_num_classes
+      max_
+      to_one_hot
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      DataLoader
+      MemoryDataLoader
+   
