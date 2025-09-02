@@ -90,7 +90,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="nerva_tensorflow.html">nerva_tensorflow</a></li>
       <li class="breadcrumb-item active">nerva_tensorflow.softmax_functions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/_autosummary/nerva_tensorflow.softmax_functions.rst.txt" rel="nofollow"> View page source</a>
@@ -153,50 +152,114 @@
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.softmax">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.softmax" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.softmax" title="Link to this definition"></a></dt>
 <dd><p>Row-wise softmax with explicit normalization (numerically unsafe).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.softmax_jacobian">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">softmax_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#softmax_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.softmax_jacobian" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">softmax_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#softmax_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.softmax_jacobian" title="Link to this definition"></a></dt>
 <dd><p>Jacobian matrix of softmax for a single row vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.stable_softmax">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">stable_softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#stable_softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.stable_softmax" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">stable_softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#stable_softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.stable_softmax" title="Link to this definition"></a></dt>
 <dd><p>Row-wise softmax using max-subtraction for numerical stability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.stable_softmax_jacobian">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">stable_softmax_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#stable_softmax_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.stable_softmax_jacobian" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">stable_softmax_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#stable_softmax_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.stable_softmax_jacobian" title="Link to this definition"></a></dt>
 <dd><p>Jacobian matrix of stable softmax for a single row vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.log_softmax">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">log_softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#log_softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.log_softmax" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">log_softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#log_softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.log_softmax" title="Link to this definition"></a></dt>
 <dd><p>Row-wise log-softmax (numerically unsafe version).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.log_softmax_jacobian">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">log_softmax_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#log_softmax_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.log_softmax_jacobian" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">log_softmax_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#log_softmax_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.log_softmax_jacobian" title="Link to this definition"></a></dt>
 <dd><p>Jacobian matrix of log_softmax for a single row vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.stable_log_softmax">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">stable_log_softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#stable_log_softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.stable_log_softmax" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">stable_log_softmax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#stable_log_softmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.stable_log_softmax" title="Link to this definition"></a></dt>
 <dd><p>Row-wise log-softmax with max-subtraction for stability.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.stable_log_softmax_jacobian">
-<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">stable_log_softmax_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#stable_log_softmax_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.stable_log_softmax_jacobian" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">nerva_tensorflow.softmax_functions.</span></span><span class="sig-name descname"><span class="pre">stable_log_softmax_jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#stable_log_softmax_jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.stable_log_softmax_jacobian" title="Link to this definition"></a></dt>
 <dd><p>Jacobian matrix of stable log_softmax (same as log_softmax).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py class">
@@ -205,8 +268,16 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.SoftmaxFunction.jacobian">
-<span class="sig-name descname"><span class="pre">jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#SoftmaxFunction.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.SoftmaxFunction.jacobian" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#SoftmaxFunction.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.SoftmaxFunction.jacobian" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -216,8 +287,16 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.StableSoftmaxFunction.jacobian">
-<span class="sig-name descname"><span class="pre">jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#StableSoftmaxFunction.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.StableSoftmaxFunction.jacobian" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#StableSoftmaxFunction.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.StableSoftmaxFunction.jacobian" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -227,8 +306,16 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.LogSoftmaxFunction.jacobian">
-<span class="sig-name descname"><span class="pre">jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#LogSoftmaxFunction.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.LogSoftmaxFunction.jacobian" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#LogSoftmaxFunction.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.LogSoftmaxFunction.jacobian" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -238,8 +325,16 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="nerva_tensorflow.softmax_functions.StableLogSoftmaxFunction.jacobian">
-<span class="sig-name descname"><span class="pre">jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensorflow.Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensorflow.Tensor</span></span></span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#StableLogSoftmaxFunction.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.StableLogSoftmaxFunction.jacobian" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-name descname"><span class="pre">jacobian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/nerva_tensorflow/softmax_functions.html#StableLogSoftmaxFunction.jacobian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#nerva_tensorflow.softmax_functions.StableLogSoftmaxFunction.jacobian" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>tensorflow.Tensor</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tensorflow.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

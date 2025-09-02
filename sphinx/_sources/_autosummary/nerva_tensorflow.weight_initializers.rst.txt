@@ -1,4 +1,4 @@
-nerva\_tensorflow.weight\_initializers
+﻿nerva\_tensorflow.weight\_initializers
 ======================================
 
 .. automodule:: nerva_tensorflow.weight_initializers

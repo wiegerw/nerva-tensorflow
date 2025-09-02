@@ -1,4 +1,4 @@
-nerva\_tensorflow.softmax\_functions
+﻿nerva\_tensorflow.softmax\_functions
 ====================================
 
 .. automodule:: nerva_tensorflow.softmax_functions

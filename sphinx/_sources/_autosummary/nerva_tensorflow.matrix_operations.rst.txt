@@ -1,4 +1,4 @@
-nerva\_tensorflow.matrix\_operations
+﻿nerva\_tensorflow.matrix\_operations
 ====================================
 
 .. automodule:: nerva_tensorflow.matrix_operations
