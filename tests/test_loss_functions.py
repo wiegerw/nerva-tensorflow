@@ -6,7 +6,7 @@ import unittest
 
 from nerva_tensorflow.loss_functions import SoftmaxCrossEntropyLossFunction, SquaredErrorLossFunction, \
     NegativeLogLikelihoodLossFunction, CrossEntropyLossFunction, LogisticCrossEntropyLossFunction
-from utilities import to_tensor
+from utilities import to_tensor, as_float
 
 
 class TestLossFunctions(unittest.TestCase):
@@ -37,7 +37,7 @@ class TestLossFunctions(unittest.TestCase):
         ]
 
         for loss_fn, expected in losses:
-            L = loss_fn(Y, T)
+            L = as_float(loss_fn(Y, T))
             self.assertAlmostEqual(L, expected, places=5, msg=f"{loss_fn.__class__.__name__} failed: got {L}, expected {expected}")
 
     def test_loss2(self):
@@ -67,7 +67,7 @@ class TestLossFunctions(unittest.TestCase):
         ]
 
         for loss_fn, expected in losses:
-            L = loss_fn(Y, T)
+            L = as_float(loss_fn(Y, T))
             self.assertAlmostEqual(L, expected, places=5, msg=f"{loss_fn.__class__.__name__} failed: got {L}, expected {expected}")
 
     def test_loss3(self):
@@ -97,7 +97,7 @@ class TestLossFunctions(unittest.TestCase):
         ]
 
         for loss_fn, expected in losses:
-            L = loss_fn(Y, T)
+            L = as_float(loss_fn(Y, T))
             self.assertAlmostEqual(L, expected, places=5, msg=f"{loss_fn.__class__.__name__} failed: got {L}, expected {expected}")
 
 
@@ -128,7 +128,7 @@ class TestLossFunctions(unittest.TestCase):
         ]
 
         for loss_fn, expected in losses:
-            L = loss_fn(Y, T)
+            L = as_float(loss_fn(Y, T))
             self.assertAlmostEqual(L, expected, places=5, msg=f"{loss_fn.__class__.__name__} failed: got {L}, expected {expected}")
 
     def test_loss5(self):
@@ -158,5 +158,5 @@ class TestLossFunctions(unittest.TestCase):
         ]
 
         for loss_fn, expected in losses:
-            L = loss_fn(Y, T)
+            L = as_float(loss_fn(Y, T))
             self.assertAlmostEqual(L, expected, places=5, msg=f"{loss_fn.__class__.__name__} failed: got {L}, expected {expected}")

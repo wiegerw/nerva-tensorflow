@@ -5,7 +5,9 @@
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
 from pathlib import Path
+
 import tensorflow as tf
+
 from nerva_tensorflow.activation_functions import ActivationFunction, HyperbolicTangentActivation
 from nerva_tensorflow.datasets import create_npz_dataloaders
 from nerva_tensorflow.layers import ActivationLayer, LinearLayer
@@ -17,10 +19,10 @@ from nerva_tensorflow.optimizers import MomentumOptimizer, NesterovOptimizer, Co
 from nerva_tensorflow.training import stochastic_gradient_descent
 from nerva_tensorflow.weight_initializers import set_bias_to_zero, set_weights_xavier_normalized
 
-
 # ------------------------
 # Custom activation function
 # ------------------------
+
 
 def Elu(alpha):
     return lambda X: tf.where(X > 0, X, alpha * (tf.exp(X) - 1))

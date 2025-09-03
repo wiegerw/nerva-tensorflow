@@ -9,6 +9,7 @@ from dataclasses import dataclass
 from typing import List
 
 import tensorflow as tf
+
 from nerva_tensorflow.learning_rate import ConstantScheduler
 from nerva_tensorflow.datasets import MemoryDataLoader, from_one_hot
 from nerva_tensorflow.loss_functions import SoftmaxCrossEntropyLossFunction
@@ -20,7 +21,7 @@ from nerva_tensorflow.training import stochastic_gradient_descent_plain, stochas
 # ----------------------------
 # Package-agnostic helpers (imported from tests.utilities)
 # ----------------------------
-from utilities import to_tensor, all_close, assert_tensors_are_close
+from utilities import to_tensor, assert_tensors_are_close
 
 # ----------------------------
 # MLPSpec dataclass
@@ -58,6 +59,7 @@ def construct_mlp(linear_layer_sizes: List[int]):
 # ----------------------------
 # Test case
 # ----------------------------
+
 
 class TestMLP(unittest.TestCase):
 

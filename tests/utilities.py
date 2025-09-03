@@ -110,6 +110,13 @@ def assert_tensors_are_close(name1: str, X1: tf.Tensor,
         max_diff = tf.reduce_max(diff).numpy().item()
         raise AssertionError(f"Tensors {name1} and {name2} are not close. Max diff: {max_diff:.8f}")
 
+
+def as_float(x: tf.Tensor) -> float:
+    """Convert a 0-d TensorFlow tensor to a Python float."""
+    if x.shape.rank != 0:
+        raise ValueError("Input must be 0-dimensional")
+    return float(x.numpy())
+
 # ------------------------
 # Test generation
 # ------------------------
