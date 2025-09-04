@@ -128,11 +128,7 @@ def parse_function_call(text: str) -> FunctionCall:
 
 
 def load_dict_from_npz(filename: str) -> Dict[str, tf.Tensor]:
-    """
-    Loads a dictionary from a file in .npz format
-    :param filename: a file name
-    :return: a dictionary with TensorFlow tensors
-    """
+    """Loads a dictionary from a file in .npz format"""
     def make_tensor(x: np.ndarray) -> tf.Tensor:
         if np.issubdtype(x.dtype, np.integer):
             return tf.convert_to_tensor(x, dtype=tf.int64)
@@ -141,3 +137,13 @@ def load_dict_from_npz(filename: str) -> Dict[str, tf.Tensor]:
     data = dict(np.load(filename, allow_pickle=True))
     data = {key: make_tensor(value) for key, value in data.items()}
     return data
+
+
+def save_dict_to_npz(filename: str, data: Dict[str, tf.Tensor]):
+    """Saves a dictionary of TensorFlow tensors to a compressed .npz file."""
+    if not filename.endswith(".npz"):
+        filename += ".npz"
+
+    # convert all tensors to numpy arrays (on CPU)
+    numpy_data = {key: value.numpy() for key, value in data.items()}
+    np.savez_compressed(filename, **numpy_data)
