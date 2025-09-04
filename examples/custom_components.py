@@ -7,17 +7,17 @@
 from pathlib import Path
 
 import tensorflow as tf
-
 from nerva_tensorflow.activation_functions import ActivationFunction, HyperbolicTangentActivation
 from nerva_tensorflow.datasets import create_npz_dataloaders
 from nerva_tensorflow.layers import ActivationLayer, LinearLayer
 from nerva_tensorflow.learning_rate import TimeBasedScheduler
 from nerva_tensorflow.loss_functions import LossFunction
-from nerva_tensorflow.matrix_operations import elements_sum, Matrix
+from nerva_tensorflow.matrix_operations import Matrix
 from nerva_tensorflow.multilayer_perceptron import MultilayerPerceptron
 from nerva_tensorflow.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
-from nerva_tensorflow.training import stochastic_gradient_descent
+from nerva_tensorflow.training import stochastic_gradient_descent, SGDOptions
 from nerva_tensorflow.weight_initializers import set_bias_to_zero, set_weights_xavier_normalized
+
 
 # ------------------------
 # Custom activation function
@@ -50,8 +50,7 @@ class ELUActivation(ActivationFunction):
 def set_weights_lecun(W: Matrix):
     K, D = W.shape
     stddev = tf.sqrt(tf.constant(1.0 / D, dtype=tf.float32))
-    W.assign(tf.random.normal((K, D), stddev=stddev))
-
+    W.assign(tf.random.normal((K, D), stddev=stddev, dtype=W.dtype))
 
 # ------------------------
 # Custom loss function
@@ -84,8 +83,8 @@ def main():
 
     # configure layer 2
     layer2 = ActivationLayer(1024, 512, HyperbolicTangentActivation())
-    set_weights_lecun(layer1.W)
-    set_bias_to_zero(layer1.b)
+    set_weights_lecun(layer2.W)
+    set_bias_to_zero(layer2.b)
     layer2.set_optimizer("Momentum(0.8)")
 
     # configure layer 3
