@@ -7,6 +7,7 @@
 from pathlib import Path
 
 import tensorflow as tf
+
 from nerva_tensorflow.activation_functions import ActivationFunction, HyperbolicTangentActivation
 from nerva_tensorflow.datasets import create_npz_dataloaders
 from nerva_tensorflow.layers import ActivationLayer, LinearLayer
@@ -15,7 +16,7 @@ from nerva_tensorflow.loss_functions import LossFunction
 from nerva_tensorflow.matrix_operations import Matrix
 from nerva_tensorflow.multilayer_perceptron import MultilayerPerceptron
 from nerva_tensorflow.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
-from nerva_tensorflow.training import stochastic_gradient_descent, SGDOptions
+from nerva_tensorflow.training import stochastic_gradient_descent
 from nerva_tensorflow.weight_initializers import set_bias_to_zero, set_weights_xavier_normalized
 
 
@@ -51,6 +52,7 @@ def set_weights_lecun(W: Matrix):
     K, D = W.shape
     stddev = tf.sqrt(tf.constant(1.0 / D, dtype=tf.float32))
     W.assign(tf.random.normal((K, D), stddev=stddev, dtype=W.dtype))
+
 
 # ------------------------
 # Custom loss function
