@@ -13,7 +13,7 @@ from nerva_tensorflow.datasets import create_npz_dataloaders
 from nerva_tensorflow.layers import ActivationLayer, LinearLayer
 from nerva_tensorflow.learning_rate import TimeBasedScheduler
 from nerva_tensorflow.loss_functions import LossFunction
-from nerva_tensorflow.matrix_operations import Matrix
+from nerva_tensorflow.matrix_operations import elements_sum, Matrix
 from nerva_tensorflow.multilayer_perceptron import MultilayerPerceptron
 from nerva_tensorflow.optimizers import MomentumOptimizer, NesterovOptimizer, CompositeOptimizer
 from nerva_tensorflow.training import stochastic_gradient_descent
@@ -60,7 +60,7 @@ def set_weights_lecun(W: Matrix):
 
 class AbsoluteErrorLossFunction(LossFunction):
     def __call__(self, Y: Matrix, T: Matrix) -> float:
-        return tf.reduce_sum(tf.abs(Y - T)).numpy()
+        return elements_sum(abs(Y - T))
 
     def gradient(self, Y: Matrix, T: Matrix) -> Matrix:
         return tf.sign(Y - T)
@@ -97,11 +97,8 @@ def main():
     M.layers = [layer1, layer2, layer3]
 
     loss: LossFunction = AbsoluteErrorLossFunction()
-
     learning_rate = TimeBasedScheduler(lr=0.1, decay=0.09)
-
     epochs = 5
-
     stochastic_gradient_descent(M, epochs, loss, learning_rate, train_loader, test_loader)
 
 
