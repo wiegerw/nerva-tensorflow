@@ -4,60 +4,97 @@
 
 """Weight and bias initialization helpers for linear layers."""
 
-from nerva_tensorflow.matrix_operations import Matrix
+import math
 import tensorflow as tf
+from nerva_tensorflow.matrix_operations import Matrix
+from nerva_tensorflow.utilities import parse_function_call
 
 
-def set_bias_to_zero(b: Matrix):
+def set_bias_zero(b: Matrix):
     """Set all bias values to zero."""
     b.assign(tf.zeros_like(b))
 
 
-def set_weights_xavier(W: Matrix):
-    """Initialize weights using Xavier/Glorot initialization."""
-    initializer = tf.initializers.GlorotUniform()
-    tf_w = tf.Variable(initializer(shape=W.shape))
-    W.assign(tf.cast(tf_w, dtype=W.dtype))
-
-def set_bias_xavier(b: Matrix):
-    """Set bias to zero (Xavier scheme for bias)."""
-    set_bias_to_zero(b)
+def set_bias_uniform(b: Matrix, a: float = 0.0, b_: float = 1.0):
+    """Uniform initialization within [a, b)."""
+    b.assign(tf.random.uniform(b.shape, minval=a, maxval=b_, dtype=b.dtype))
 
 
-def set_weights_xavier_normalized(W: Matrix):
-    """Initialize weights using normalized Xavier initialization."""
-    initializer = tf.initializers.GlorotNormal()
-    tf_w = tf.Variable(initializer(shape=W.shape))
-    W.assign(tf.cast(tf_w, dtype=W.dtype))
+def set_bias_normal(b: Matrix, mean: float = 0.0, std: float = 1.0):
+    """Normal (Gaussian) initialization with given mean and std."""
+    b.assign(tf.random.normal(b.shape, mean=mean, stddev=std, dtype=b.dtype))
 
 
-def set_bias_xavier_normalized(b: Matrix):
-    """Set bias to zero (normalized Xavier scheme)."""
-    set_bias_to_zero(b)
+def set_weights_uniform(W: Matrix, a: float = 0.0, b: float = 1.0):
+    """Uniform initialization within [a, b)."""
+    W.assign(tf.random.uniform(W.shape, minval=a, maxval=b, dtype=W.dtype))
 
 
-def set_weights_he(W: Matrix):
-    """Initialize weights using He initialization for ReLU networks."""
-    initializer = tf.initializers.HeNormal()
-    tf_w = tf.Variable(initializer(shape=W.shape))
-    W.assign(tf.cast(tf_w, dtype=W.dtype))
+def set_weights_normal(W: Matrix, mean: float = 0.0, std: float = 1.0):
+    """Normal (Gaussian) initialization with given mean and std."""
+    W.assign(tf.random.normal(W.shape, mean=mean, stddev=std, dtype=W.dtype))
 
 
-def set_bias_he(b: Matrix):
-    """Set bias to zero (He scheme for bias)."""
-    set_bias_to_zero(b)
+def set_weights_xavier_uniform(W: Matrix):
+    """Xavier / Glorot uniform initialization."""
+    K, D = W.shape
+    limit = math.sqrt(6.0 / (D + K))
+    W.assign(tf.random.uniform(W.shape, minval=-limit, maxval=limit, dtype=W.dtype))
+
+
+def set_weights_xavier_normal(W: Matrix):
+    """Xavier / Glorot normal initialization."""
+    K, D = W.shape
+    std = math.sqrt(2.0 / (D + K))
+    W.assign(tf.random.normal(W.shape, mean=0.0, stddev=std, dtype=W.dtype))
+
+
+def set_weights_he_normal(W: Matrix):
+    """He / Kaiming normal initialization (for ReLU)."""
+    K, D = W.shape
+    std = math.sqrt(2.0 / D)
+    W.assign(tf.random.normal(W.shape, mean=0.0, stddev=std, dtype=W.dtype))
+
+
+def set_weights_he_uniform(W: Matrix):
+    """He / Kaiming uniform initialization (for ReLU)."""
+    K, D = W.shape
+    limit = math.sqrt(6.0 / D)
+    W.assign(tf.random.uniform(W.shape, minval=-limit, maxval=limit, dtype=W.dtype))
+
+
+def set_weights_zero(W: Matrix):
+    """Initialize weights to zero."""
+    W.assign(tf.zeros_like(W))
 
 
 def set_layer_weights(layer, text: str):
     """Initialize a layer's parameters according to a named scheme."""
-    if text == 'Xavier':
-        set_weights_xavier(layer.W)
-        set_bias_xavier(layer.b)
-    elif text == 'XavierNormalized':
-        set_weights_xavier_normalized(layer.W)
-        set_bias_xavier_normalized(layer.b)
-    elif text == 'He':
-        set_weights_he(layer.W)
-        set_bias_he(layer.b)
+    func = parse_function_call(text)
+    if func.name == 'Uniform':
+        a = func.as_scalar('a', 0)
+        b = func.as_scalar('b', 1)
+        set_weights_uniform(layer.W, a, b)
+        set_bias_zero(layer.b)
+    elif func.name == 'Normal':
+        a = func.as_scalar('a', 0)
+        b = func.as_scalar('b', 1)
+        set_weights_normal(layer.W, a, b)
+        set_bias_zero(layer.b)
+    elif func.name == 'XavierUniform':
+        set_weights_xavier_uniform(layer.W)
+        set_bias_zero(layer.b)
+    elif func.name == 'XavierNormal':
+        set_weights_xavier_normal(layer.W)
+        set_bias_zero(layer.b)
+    elif func.name == 'HeUniform':
+        set_weights_he_uniform(layer.W)
+        set_bias_zero(layer.b)
+    elif func.name == 'HeNormal':
+        set_weights_he_normal(layer.W)
+        set_bias_zero(layer.b)
+    elif func.name == 'Zero':
+        set_weights_zero(layer.W)
+        set_bias_zero(layer.b)
     else:
         raise RuntimeError(f'Could not parse weight initializer "{text}"')

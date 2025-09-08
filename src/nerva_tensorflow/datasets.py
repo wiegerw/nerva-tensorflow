@@ -10,9 +10,9 @@
 
 from pathlib import Path
 from typing import Tuple, Union
+import tensorflow as tf
 from nerva_tensorflow.matrix_operations import Matrix
 from nerva_tensorflow.utilities import load_dict_from_npz
-import tensorflow as tf
 
 
 def to_one_hot(x: tf.Tensor, num_classes: int):
@@ -26,7 +26,7 @@ def from_one_hot(one_hot: tf.Tensor) -> tf.Tensor:
     return tf.argmax(one_hot, axis=1, output_type=tf.int64)
 
 
-class MemoryDataLoader(object):
+class DataLoader(object):
     """A minimal in-memory data loader with an interface similar to torch.utils.data.DataLoader.
 
     Notes / Warning:
@@ -52,18 +52,25 @@ class MemoryDataLoader(object):
         self.num_classes = int(tf.reduce_max(Tdata) + 1) if num_classes == 0 and len(Tdata.shape) == 1 else num_classes
 
     def __iter__(self):
-        N = self.Xdata.shape[0]  # N is the number of examples
-        K = N // self.batch_size  # K is the number of batches
-        for k in range(K):
-            batch = range(k * self.batch_size, (k + 1) * self.batch_size)
-            yield tf.gather(self.Xdata, batch), to_one_hot(tf.gather(self.Tdata, batch), self.num_classes) if self.num_classes else tf.gather(self.Tdata, batch)
+        N = self.Xdata.shape[0]
+        for start in range(0, N, self.batch_size):
+            end = min(start + self.batch_size, N)
+            batch = range(start, end)
+            Xbatch = tf.gather(self.Xdata, batch)
+            Tbatch = tf.gather(self.Tdata, batch)
+            if self.num_classes:
+                Tbatch = to_one_hot(Tbatch, self.num_classes)
+            yield Xbatch, Tbatch
 
     def __len__(self):
-        """Number of batches."""
-        return self.Xdata.shape[0] // self.batch_size
+        """Number of batches (including incomplete last one)."""
+        N = self.Xdata.shape[0]
+        return (N + self.batch_size - 1) // self.batch_size
 
-
-DataLoader = MemoryDataLoader
+    @property
+    def dataset_size(self):
+        """Total number of examples."""
+        return int(self.Xdata.shape[0])
 
 
 def max_(X: Matrix) -> Union[int, float]:
@@ -88,7 +95,7 @@ def infer_num_classes(Ttrain: Matrix, Ttest: Matrix) -> int:
     return int(max(max_train, max_test) + 1)
 
 
-def create_npz_dataloaders(filename: str, batch_size: int=True) -> Tuple[MemoryDataLoader, MemoryDataLoader]:
+def create_npz_dataloaders(filename: str, batch_size: int=True) -> Tuple[DataLoader, DataLoader]:
     """Creates a data loader from a file containing a dictionary with Xtrain, Ttrain, Xtest and Ttest tensors."""
     path = Path(filename)
     print(f'Loading dataset from file {path}')
@@ -101,6 +108,6 @@ def create_npz_dataloaders(filename: str, batch_size: int=True) -> Tuple[MemoryD
     # Determine number of classes robustly to avoid underestimating when some classes are absent
     num_classes = infer_num_classes(Ttrain, Ttest)
 
-    train_loader = MemoryDataLoader(Xtrain, Ttrain, batch_size, num_classes=num_classes)
-    test_loader = MemoryDataLoader(Xtest, Ttest, batch_size, num_classes=num_classes)
+    train_loader = DataLoader(Xtrain, Ttrain, batch_size, num_classes=num_classes)
+    test_loader = DataLoader(Xtest, Ttest, batch_size, num_classes=num_classes)
     return train_loader, test_loader
