@@ -86,68 +86,97 @@
 
 <span class="sd">&quot;&quot;&quot;Weight and bias initialization helpers for linear layers.&quot;&quot;&quot;</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_tensorflow.matrix_operations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_tensorflow.matrix_operations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nerva_tensorflow.utilities</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_function_call</span>
 
 
-<div class="viewcode-block" id="set_bias_to_zero">
-<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_to_zero">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">set_bias_to_zero</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
+<div class="viewcode-block" id="set_bias_zero">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_zero">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_bias_zero</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set all bias values to zero.&quot;&quot;&quot;</span>
     <span class="n">b</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">b</span><span class="p">))</span></div>
 
 
 
-<div class="viewcode-block" id="set_weights_xavier">
-<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_xavier">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_xavier</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize weights using Xavier/Glorot initialization.&quot;&quot;&quot;</span>
-    <span class="n">initializer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">GlorotUniform</span><span class="p">()</span>
-    <span class="n">tf_w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">initializer</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf_w</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
-
-
-<div class="viewcode-block" id="set_bias_xavier">
-<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_xavier">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">set_bias_xavier</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set bias to zero (Xavier scheme for bias).&quot;&quot;&quot;</span>
-    <span class="n">set_bias_to_zero</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
+<div class="viewcode-block" id="set_bias_uniform">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_uniform">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_bias_uniform</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">b_</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Uniform initialization within [a, b).&quot;&quot;&quot;</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">minval</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="n">b_</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
 
 
 
-<div class="viewcode-block" id="set_weights_xavier_normalized">
-<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_xavier_normalized">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_xavier_normalized</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize weights using normalized Xavier initialization.&quot;&quot;&quot;</span>
-    <span class="n">initializer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">GlorotNormal</span><span class="p">()</span>
-    <span class="n">tf_w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">initializer</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf_w</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
+<div class="viewcode-block" id="set_bias_normal">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_normal">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_bias_normal</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">std</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Normal (Gaussian) initialization with given mean and std.&quot;&quot;&quot;</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="n">std</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
 
 
 
-<div class="viewcode-block" id="set_bias_xavier_normalized">
-<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_xavier_normalized">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">set_bias_xavier_normalized</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set bias to zero (normalized Xavier scheme).&quot;&quot;&quot;</span>
-    <span class="n">set_bias_to_zero</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
+<div class="viewcode-block" id="set_weights_uniform">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_uniform">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_uniform</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Uniform initialization within [a, b).&quot;&quot;&quot;</span>
+    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">minval</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
 
 
 
-<div class="viewcode-block" id="set_weights_he">
-<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_he">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_he</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize weights using He initialization for ReLU networks.&quot;&quot;&quot;</span>
-    <span class="n">initializer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">initializers</span><span class="o">.</span><span class="n">HeNormal</span><span class="p">()</span>
-    <span class="n">tf_w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">initializer</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tf_w</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
+<div class="viewcode-block" id="set_weights_normal">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_normal">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_normal</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">std</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Normal (Gaussian) initialization with given mean and std.&quot;&quot;&quot;</span>
+    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="n">std</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
 
 
 
-<div class="viewcode-block" id="set_bias_he">
-<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_he">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">set_bias_he</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set bias to zero (He scheme for bias).&quot;&quot;&quot;</span>
-    <span class="n">set_bias_to_zero</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
+<div class="viewcode-block" id="set_weights_xavier_uniform">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_xavier_uniform">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_xavier_uniform</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Xavier / Glorot uniform initialization.&quot;&quot;&quot;</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">6.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">D</span> <span class="o">+</span> <span class="n">K</span><span class="p">))</span>
+    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">minval</span><span class="o">=-</span><span class="n">limit</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="set_weights_xavier_normal">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_xavier_normal">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_xavier_normal</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Xavier / Glorot normal initialization.&quot;&quot;&quot;</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">D</span> <span class="o">+</span> <span class="n">K</span><span class="p">))</span>
+    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="n">std</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="set_weights_he_normal">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_he_normal">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_he_normal</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;He / Kaiming normal initialization (for ReLU).&quot;&quot;&quot;</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">D</span><span class="p">)</span>
+    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="n">std</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="set_weights_he_uniform">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_he_uniform">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_he_uniform</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;He / Kaiming uniform initialization (for ReLU).&quot;&quot;&quot;</span>
+    <span class="n">K</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">limit</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">6.0</span> <span class="o">/</span> <span class="n">D</span><span class="p">)</span>
+    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">minval</span><span class="o">=-</span><span class="n">limit</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">W</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="set_weights_zero">
+<a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_zero">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_weights_zero</span><span class="p">(</span><span class="n">W</span><span class="p">:</span> <span class="n">Matrix</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize weights to zero.&quot;&quot;&quot;</span>
+    <span class="n">W</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">W</span><span class="p">))</span></div>
 
 
 
@@ -155,15 +184,32 @@
 <a class="viewcode-back" href="../../_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_layer_weights">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">set_layer_weights</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize a layer&#39;s parameters according to a named scheme.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s1">&#39;Xavier&#39;</span><span class="p">:</span>
-        <span class="n">set_weights_xavier</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
-        <span class="n">set_bias_xavier</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">text</span> <span class="o">==</span> <span class="s1">&#39;XavierNormalized&#39;</span><span class="p">:</span>
-        <span class="n">set_weights_xavier_normalized</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
-        <span class="n">set_bias_xavier_normalized</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">text</span> <span class="o">==</span> <span class="s1">&#39;He&#39;</span><span class="p">:</span>
-        <span class="n">set_weights_he</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
-        <span class="n">set_bias_he</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">parse_function_call</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Uniform&#39;</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">as_scalar</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">as_scalar</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">set_weights_uniform</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">set_bias_zero</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Normal&#39;</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">as_scalar</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">as_scalar</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">set_weights_normal</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">set_bias_zero</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;XavierUniform&#39;</span><span class="p">:</span>
+        <span class="n">set_weights_xavier_uniform</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="n">set_bias_zero</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;XavierNormal&#39;</span><span class="p">:</span>
+        <span class="n">set_weights_xavier_normal</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="n">set_bias_zero</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;HeUniform&#39;</span><span class="p">:</span>
+        <span class="n">set_weights_he_uniform</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="n">set_bias_zero</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;HeNormal&#39;</span><span class="p">:</span>
+        <span class="n">set_weights_he_normal</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="n">set_bias_zero</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">func</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Zero&#39;</span><span class="p">:</span>
+        <span class="n">set_weights_zero</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="n">set_bias_zero</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Could not parse weight initializer &quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span></div>
 

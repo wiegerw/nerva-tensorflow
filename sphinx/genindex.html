@@ -198,7 +198,9 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/nerva_tensorflow.datasets.html#nerva_tensorflow.datasets.DataLoader">DataLoader (in module nerva_tensorflow.datasets)</a>
+      <li><a href="_autosummary/nerva_tensorflow.datasets.html#nerva_tensorflow.datasets.DataLoader">DataLoader (class in nerva_tensorflow.datasets)</a>
+</li>
+      <li><a href="_autosummary/nerva_tensorflow.datasets.html#nerva_tensorflow.datasets.DataLoader.dataset_size">dataset_size (nerva_tensorflow.datasets.DataLoader property)</a>
 </li>
       <li><a href="_autosummary/nerva_tensorflow.training.html#nerva_tensorflow.training.TrainOptions.debug">debug (nerva_tensorflow.training.TrainOptions attribute)</a>
 </li>
@@ -413,8 +415,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/nerva_tensorflow.datasets.html#nerva_tensorflow.datasets.max_">max_() (in module nerva_tensorflow.datasets)</a>
-</li>
-      <li><a href="_autosummary/nerva_tensorflow.datasets.html#nerva_tensorflow.datasets.MemoryDataLoader">MemoryDataLoader (class in nerva_tensorflow.datasets)</a>
 </li>
       <li>
     module
@@ -668,13 +668,11 @@
 </li>
       <li><a href="_autosummary/nerva_tensorflow.utilities.html#nerva_tensorflow.utilities.StopWatch.seconds">seconds() (nerva_tensorflow.utilities.StopWatch method)</a>
 </li>
-      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_he">set_bias_he() (in module nerva_tensorflow.weight_initializers)</a>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_normal">set_bias_normal() (in module nerva_tensorflow.weight_initializers)</a>
 </li>
-      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_to_zero">set_bias_to_zero() (in module nerva_tensorflow.weight_initializers)</a>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_uniform">set_bias_uniform() (in module nerva_tensorflow.weight_initializers)</a>
 </li>
-      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_xavier">set_bias_xavier() (in module nerva_tensorflow.weight_initializers)</a>
-</li>
-      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_xavier_normalized">set_bias_xavier_normalized() (in module nerva_tensorflow.weight_initializers)</a>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_bias_zero">set_bias_zero() (in module nerva_tensorflow.weight_initializers)</a>
 </li>
       <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_layer_weights">set_layer_weights() (in module nerva_tensorflow.weight_initializers)</a>
 </li>
@@ -692,11 +690,19 @@
 </li>
       <li><a href="_autosummary/nerva_tensorflow.layers.html#nerva_tensorflow.layers.LinearLayer.set_weights">set_weights() (nerva_tensorflow.layers.LinearLayer method)</a>
 </li>
-      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_he">set_weights_he() (in module nerva_tensorflow.weight_initializers)</a>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_he_normal">set_weights_he_normal() (in module nerva_tensorflow.weight_initializers)</a>
 </li>
-      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_xavier">set_weights_xavier() (in module nerva_tensorflow.weight_initializers)</a>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_he_uniform">set_weights_he_uniform() (in module nerva_tensorflow.weight_initializers)</a>
 </li>
-      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_xavier_normalized">set_weights_xavier_normalized() (in module nerva_tensorflow.weight_initializers)</a>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_normal">set_weights_normal() (in module nerva_tensorflow.weight_initializers)</a>
+</li>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_uniform">set_weights_uniform() (in module nerva_tensorflow.weight_initializers)</a>
+</li>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_xavier_normal">set_weights_xavier_normal() (in module nerva_tensorflow.weight_initializers)</a>
+</li>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_xavier_uniform">set_weights_xavier_uniform() (in module nerva_tensorflow.weight_initializers)</a>
+</li>
+      <li><a href="_autosummary/nerva_tensorflow.weight_initializers.html#nerva_tensorflow.weight_initializers.set_weights_zero">set_weights_zero() (in module nerva_tensorflow.weight_initializers)</a>
 </li>
       <li><a href="_autosummary/nerva_tensorflow.activation_functions.html#nerva_tensorflow.activation_functions.Sigmoid">Sigmoid() (in module nerva_tensorflow.activation_functions)</a>
 </li>
@@ -720,10 +726,10 @@
 </li>
       <li><a href="_autosummary/nerva_tensorflow.softmax_functions.html#nerva_tensorflow.softmax_functions.softmax_jacobian">softmax_jacobian() (in module nerva_tensorflow.softmax_functions)</a>
 </li>
-      <li><a href="_autosummary/nerva_tensorflow.loss_functions.html#nerva_tensorflow.loss_functions.SoftmaxCrossEntropyLossFunction">SoftmaxCrossEntropyLossFunction (class in nerva_tensorflow.loss_functions)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="_autosummary/nerva_tensorflow.loss_functions.html#nerva_tensorflow.loss_functions.SoftmaxCrossEntropyLossFunction">SoftmaxCrossEntropyLossFunction (class in nerva_tensorflow.loss_functions)</a>
+</li>
       <li><a href="_autosummary/nerva_tensorflow.softmax_functions.html#nerva_tensorflow.softmax_functions.SoftmaxFunction">SoftmaxFunction (class in nerva_tensorflow.softmax_functions)</a>
 </li>
       <li><a href="_autosummary/nerva_tensorflow.layers.html#nerva_tensorflow.layers.SoftmaxLayer">SoftmaxLayer (class in nerva_tensorflow.layers)</a>

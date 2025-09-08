@@ -19,5 +19,4 @@ nerva\_tensorflow.datasets
    .. autosummary::
    
       DataLoader
-      MemoryDataLoader
    
