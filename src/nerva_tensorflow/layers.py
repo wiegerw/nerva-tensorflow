@@ -187,7 +187,7 @@ class SoftmaxLayer(LinearLayer):
         X = self.X
         W = self.W
 
-        DZ = hadamard(Y, DY - column_repeat(diag(DY @ tf.transpose(Y)), N))
+        DZ = hadamard(Y, DY - column_repeat(diag(DY @ tf.transpose(Y)), K))
         DW = tf.transpose(DZ) @ X
         Db = columns_sum(DZ)
         DX = DZ @ W
@@ -225,7 +225,7 @@ class LogSoftmaxLayer(LinearLayer):
         W = self.W
         Z = self.Z
 
-        DZ = DY - hadamard(softmax(Z), column_repeat(rows_sum(DY), N))
+        DZ = DY - hadamard(softmax(Z), column_repeat(rows_sum(DY), K))
         DW = tf.transpose(DZ) @ X
         Db = columns_sum(DZ)
         DX = DZ @ W
@@ -260,7 +260,7 @@ class BatchNormalizationLayer(Layer):
         beta = self.beta
 
         R = X - row_repeat(columns_mean(X), N)
-        Sigma = diag(tf.transpose(R) @ R) / N
+        Sigma = tf.transpose(diag(tf.transpose(R) @ R)) / N
         inv_sqrt_Sigma = inv_sqrt(Sigma)
         Z = hadamard(row_repeat(inv_sqrt_Sigma, N), R)
         Y = hadamard(row_repeat(gamma, N), Z) + row_repeat(beta, N)
@@ -279,7 +279,7 @@ class BatchNormalizationLayer(Layer):
         DZ = hadamard(row_repeat(gamma, N), DY)
         Dbeta = columns_sum(DY)
         Dgamma = columns_sum(hadamard(DY, Z))
-        DX = hadamard(row_repeat(inv_sqrt_Sigma / N, N), (N * identity(N) - ones(N, N)) @ DZ - hadamard(Z, row_repeat(diag(tf.transpose(Z) @ DZ), N)))
+        DX = hadamard(row_repeat(inv_sqrt_Sigma / N, N), (N * identity(N) - ones(N, N)) @ DZ - hadamard(Z, row_repeat(tf.transpose(diag(tf.transpose(Z) @ DZ)), N)))
 
         self.DZ = DZ
         self.Dbeta.assign(Dbeta)
