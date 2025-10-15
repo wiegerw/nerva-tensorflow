@@ -10,16 +10,20 @@ that turns textual specifications into activation instances (e.g. "ReLU",
 """
 
 import tensorflow as tf
+
 from nerva_tensorflow.utilities import parse_function_call
 from nerva_tensorflow.matrix_operations import Matrix
 
+# Naming conventions:
+# - lowercase functions operate on real numbers
+# - uppercase functions operate on matrices
 
-def Relu(X: Matrix):
+def Relu(X: Matrix) -> Matrix:
     """Rectified linear unit activation: max(0, X)."""
     return tf.maximum(0.0, X)
 
 
-def Relu_gradient(X: Matrix):
+def Relu_gradient(X: Matrix) -> Matrix:
     """Gradient of ReLU: 1 where X > 0, 0 elsewhere."""
     return tf.where(X > 0, tf.ones_like(X), tf.zeros_like(X))
 
@@ -44,22 +48,22 @@ def All_relu_gradient(alpha):
     return lambda X: tf.where(X < 0, tf.fill(tf.shape(X), tf.cast(alpha, X.dtype)), tf.ones_like(X))
 
 
-def Hyperbolic_tangent(X: Matrix):
+def Hyperbolic_tangent(X: Matrix) -> Matrix:
     """Hyperbolic tangent activation."""
     return tf.math.tanh(X)
 
 
-def Hyperbolic_tangent_gradient(X: Matrix):
+def Hyperbolic_tangent_gradient(X: Matrix) -> Matrix:
     """Gradient of tanh: 1 - tanh²(X)."""
     return 1 - tf.math.tanh(X) ** 2
 
 
-def Sigmoid(X: Matrix):
+def Sigmoid(X: Matrix) -> Matrix:
     """Sigmoid activation: 1 / (1 + exp(-X))."""
     return tf.math.sigmoid(X)
 
 
-def Sigmoid_gradient(X: Matrix):
+def Sigmoid_gradient(X: Matrix) -> Matrix:
     """Gradient of sigmoid: σ(X) * (1 - σ(X))."""
     y = tf.math.sigmoid(X)
     return y * (1 - y)

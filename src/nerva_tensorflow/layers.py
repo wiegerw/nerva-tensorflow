@@ -183,7 +183,7 @@ class SoftmaxLayer(LinearLayer):
         return Y
 
     def backpropagate(self, Y: Matrix, DY: Matrix) -> None:
-        K, N = self.Z.shape
+        N, K = self.Z.shape
         X = self.X
         W = self.W
 
@@ -199,9 +199,7 @@ class SoftmaxLayer(LinearLayer):
 
 
 class LogSoftmaxLayer(LinearLayer):
-    """
-    Linear layer with a log_softmax activation function
-    """
+    """Linear layer followed by log_softmax over the last dimension."""
     def __init__(self, D: int, K: int):
         super().__init__(D, K)
         self.Z = None
@@ -220,7 +218,7 @@ class LogSoftmaxLayer(LinearLayer):
         return Y
 
     def backpropagate(self, Y: Matrix, DY: Matrix) -> None:
-        K, N = self.Z.shape
+        N, K = self.Z.shape
         X = self.X
         W = self.W
         Z = self.Z
