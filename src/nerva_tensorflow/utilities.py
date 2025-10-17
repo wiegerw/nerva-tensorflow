@@ -4,6 +4,7 @@
 
 """Miscellaneous utilities (formatting, timing, parsing, I/O)."""
 
+import os
 import re
 import time
 from typing import Dict
@@ -21,6 +22,23 @@ def set_tensorflow_options():
     """Configure PyTorch print options and multiprocessing strategy."""
     import numpy as np
     np.set_printoptions(precision=8, edgeitems=3, threshold=5, suppress=False, linewidth=160)
+
+
+def disable_gpu():
+    """Disable GPU usage for TensorFlow."""
+    os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
+    os.environ.setdefault("CUDA_DEVICE_ORDER", "PCI_BUS_ID")
+    os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "2")
+    os.environ.setdefault("OPENAI_ACCELERATE_DISABLE_CUDA", "1")
+
+    try:
+        import tensorflow as tf
+        try:
+            tf.config.set_visible_devices([], "GPU")
+        except Exception:
+            pass
+    except Exception:
+        pass
 
 
 def pp_numpy(name: str, arr: np.ndarray):
