@@ -188,3 +188,13 @@ def inv_sqrt(X: Matrix) -> Matrix:
 def log_sigmoid(X: Matrix) -> Matrix:
     """Element-wise log(sigmoid(X)) computed stably."""
     return -tf.nn.softplus(-X)
+
+
+def abs(X: Matrix) -> Matrix:
+    """Element-wise absolute value |X|."""
+    return tf.abs(X)
+
+
+def clip(X: Matrix, a_min: float, a_max: float) -> Matrix:
+    """Element-wise clip of X to [a_min, a_max]."""
+    return tf.clip_by_value(X, a_min, a_max)
