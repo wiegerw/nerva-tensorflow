@@ -1,25 +1,12 @@
-name: Deploy Sphinx documentation
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-
 jobs:
   sphinx-build:
     runs-on: ubuntu-latest
     container:
-      image: tensorflow/tensorflow:latest-py3
+      image: ghcr.io/wiegerw/tf-sphinx:latest
 
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
-
-      - name: Install documentation dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install sphinx sphinx-rtd-theme
 
       - name: Build Sphinx HTML
         run: bash doc/build_sphinx_documentation.sh
@@ -31,3 +18,4 @@ jobs:
           publish_dir: ./output_directory
           destination_dir: .
           keep_files: true
+
