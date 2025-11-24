@@ -9,20 +9,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: tensorflow/tensorflow:latest-py3
 
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install Sphinx
+      - name: Install documentation dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install sphinx sphinx-rtd-theme tensorflow
+          python -m pip install sphinx sphinx-rtd-theme
 
       - name: Build Sphinx HTML
         run: bash doc/build_sphinx_documentation.sh
