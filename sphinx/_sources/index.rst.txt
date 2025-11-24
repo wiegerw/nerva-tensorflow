@@ -1,5 +1,5 @@
 nerva_tensorflow documentation
-=========================
+==============================
 
 A tiny, educational set of neural network components built on TensorFlow.
 
