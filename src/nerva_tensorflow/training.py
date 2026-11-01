@@ -5,7 +5,7 @@
 """Training helpers for the MLP, including a basic SGD loop and CLI glue."""
 
 import random
-from typing import List
+from typing import List, Optional
 import tensorflow as tf
 from nerva_tensorflow.datasets import DataLoader, create_npz_dataloaders
 from nerva_tensorflow.learning_rate import parse_learning_rate, LearningRateScheduler
@@ -119,7 +119,7 @@ def stochastic_gradient_descent(M: MultilayerPerceptron,
                                 ):
 # end::sgd[]
     """
-    Run a simple stochastic gradient descent (SGD) training loop using PyTorch data loaders.
+    Run a simple stochastic gradient descent (SGD) training loop using data loaders.
 
     Args:
         M (MultilayerPerceptron): The neural network model to train.
@@ -243,6 +243,14 @@ def stochastic_gradient_descent_plain(M: MultilayerPerceptron,
 # end::sgd_plain[]
 
 
+def set_seed(seed: int):
+    """Seed the random number generators used for weight initialization and shuffling."""
+    import numpy
+    random.seed(seed)
+    numpy.random.seed(seed)
+    tf.random.set_seed(seed)
+
+
 def train(layer_specifications: List[str],
           linear_layer_sizes: List[int],
           linear_layer_optimizers: List[str],
@@ -253,11 +261,14 @@ def train(layer_specifications: List[str],
           learning_rate: str,
           weights_and_bias_file: str,
           dataset_file: str,
-          debug: bool
+          debug: bool,
+          seed: Optional[int] = None
          ):
     """High-level training convenience that wires parsing, data and SGD."""
 
     TrainOptions.debug = debug
+    if seed is not None:
+        set_seed(seed)
     set_numpy_options()
     set_tensorflow_options()
     loss = parse_loss_function(loss)
