@@ -3,10 +3,9 @@
 # (See accompanying file LICENSE or http://www.boost.org/LICENSE_1_0.txt)
 
 import unittest
-import tensorflow as tf
 from nerva_tensorflow.matrix_operations import ones
 from nerva_tensorflow.softmax_functions import softmax, stable_softmax, log_softmax, exp, stable_log_softmax, rows_sum
-from utilities import to_tensor, all_close, randn, all_finite, all_positive
+from utilities import to_tensor, all_close, randn, all_finite, all_positive, to_numpy, from_numpy
 
 
 class TestSoftmaxFunctionsBasics(unittest.TestCase):
@@ -41,7 +40,7 @@ class TestSoftmaxFunctionsBasics(unittest.TestCase):
         LS = stable_log_softmax(X)
         self.assertTrue(all_finite(LS))
         # Stable and naive should agree when subtracting max
-        Xs = X - tf.reduce_max(X, axis=1, keepdims=True)
+        Xs = X - from_numpy(to_numpy(X).max(axis=1, keepdims=True))
         self.assertTrue(all_close(log_softmax(Xs), stable_log_softmax(X), atol=1e-6))
 
 

@@ -18,8 +18,10 @@ def set_numpy_options():
 
 
 def set_tensorflow_options():
-    # N.B. Tensorflow doesn't support print options
-    """Configure PyTorch print options and multiprocessing strategy."""
+    """Configure NumPy print options, which are used for printing TensorFlow tensors.
+
+    TensorFlow itself does not support print options.
+    """
     import numpy as np
     np.set_printoptions(precision=8, edgeitems=3, threshold=5, suppress=False, linewidth=160)
 

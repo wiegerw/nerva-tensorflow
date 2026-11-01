@@ -169,3 +169,33 @@ def make_target(Y: np.ndarray) -> np.ndarray:
         T[i, random_index] = True
 
     return T
+
+
+# Adapter functions used by the test files that are shared by all backends
+
+def to_numpy(x) -> np.ndarray:
+    """Convert a tensor to a NumPy array."""
+    return x.numpy() if hasattr(x, 'numpy') else np.asarray(x)
+
+
+def from_numpy(x):
+    """Convert a NumPy array to a tensor of this backend."""
+    return tf.convert_to_tensor(x) if isinstance(x, np.ndarray) else x
+
+
+def set_parameter(obj, name: str, value):
+    """Assign value to the parameter obj.<name>, which is a tf.Variable."""
+    variable = getattr(obj, name)
+    variable.assign(tf.reshape(tf.cast(value, variable.dtype), variable.shape))
+
+
+class Parameter:
+    """A parameter x with its gradient Dx, as used by the optimizer tests."""
+    def __init__(self, x, Dx):
+        self.x = x
+        self.Dx = Dx
+
+
+def make_optimizer(optimizer_class, obj: Parameter, **kwargs):
+    """Create an optimizer that updates obj.x in place using obj.Dx."""
+    return optimizer_class(obj.x, obj.Dx, **kwargs)
