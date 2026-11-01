@@ -8,8 +8,6 @@ import unittest
 from dataclasses import dataclass
 from typing import List
 
-import tensorflow as tf
-
 from nerva_tensorflow.learning_rate import ConstantScheduler
 from nerva_tensorflow.datasets import DataLoader, from_one_hot
 from nerva_tensorflow.loss_functions import SoftmaxCrossEntropyLossFunction
@@ -21,7 +19,7 @@ from nerva_tensorflow.training import stochastic_gradient_descent_plain, stochas
 # ----------------------------
 # Package-agnostic helpers (imported from tests.utilities)
 # ----------------------------
-from utilities import to_tensor, assert_tensors_are_close
+from utilities import to_tensor, assert_tensors_are_close, set_parameter
 
 # ----------------------------
 # MLPSpec dataclass
@@ -60,15 +58,14 @@ def construct_mlp(linear_layer_sizes: List[int]):
 # Test case
 # ----------------------------
 
-
 class TestMLP(unittest.TestCase):
 
     def _initialize_mlp(self, spec: MLPSpec) -> MultilayerPerceptron:
         """Helper to construct and initialize the MLP with fixed weights/biases."""
         M = construct_mlp(spec.sizes)
         for i, (W, b) in enumerate(zip(spec.W, spec.b)):
-            M.layers[i].W.assign(W)
-            M.layers[i].b.assign(tf.reshape(b, [-1]))  # ensure b is a 1D tensor
+            set_parameter(M.layers[i], "W", W)
+            set_parameter(M.layers[i], "b", b)
         return M
 
     def _test_mlp(self, spec: MLPSpec):
