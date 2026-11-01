@@ -1,3 +1,2 @@
-numpy
-tensorflow
-scikit-learn
+numpy>=1.23
+tensorflow>=2.13
