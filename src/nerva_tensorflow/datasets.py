@@ -10,6 +10,7 @@
 
 from pathlib import Path
 from typing import Tuple, Union
+import numpy as np
 import tensorflow as tf
 from nerva_tensorflow.matrix_operations import Matrix
 from nerva_tensorflow.utilities import load_dict_from_npz
@@ -108,6 +109,21 @@ def create_npz_dataloaders(filename: str, batch_size: int = 1) -> Tuple[DataLoad
     # Determine number of classes robustly to avoid underestimating when some classes are absent
     num_classes = infer_num_classes(Ttrain, Ttest)
 
+    train_loader = DataLoader(Xtrain, Ttrain, batch_size, num_classes=num_classes)
+    test_loader = DataLoader(Xtest, Ttest, batch_size, num_classes=num_classes)
+    return train_loader, test_loader
+
+
+def create_array_dataloaders(Xtrain: np.ndarray, Ttrain: np.ndarray, Xtest: np.ndarray, Ttest: np.ndarray,
+                             batch_size: int = 1, num_classes: int = 0) -> Tuple[DataLoader, DataLoader]:
+    """Creates data loaders for a training and a test set that are given as numpy arrays.
+
+    Xtrain and Xtest contain the examples (one per row), and Ttrain and Ttest the class indices.
+    If num_classes is 0, the number of classes is inferred from the targets.
+    """
+    Xtrain, Ttrain, Xtest, Ttest = tf.convert_to_tensor(Xtrain, dtype=tf.float32), tf.convert_to_tensor(Ttrain, dtype=tf.int64), tf.convert_to_tensor(Xtest, dtype=tf.float32), tf.convert_to_tensor(Ttest, dtype=tf.int64)
+    if num_classes == 0:
+        num_classes = infer_num_classes(Ttrain, Ttest)
     train_loader = DataLoader(Xtrain, Ttrain, batch_size, num_classes=num_classes)
     test_loader = DataLoader(Xtest, Ttest, batch_size, num_classes=num_classes)
     return train_loader, test_loader
