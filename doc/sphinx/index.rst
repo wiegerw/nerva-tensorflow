@@ -23,6 +23,7 @@ API reference
    nerva_tensorflow
    nerva_tensorflow.activation_functions
    nerva_tensorflow.datasets
+   nerva_tensorflow.shapes_dataset
    nerva_tensorflow.layers
    nerva_tensorflow.learning_rate
    nerva_tensorflow.loss_functions

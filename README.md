@@ -70,7 +70,7 @@ pip install nerva-tensorflow
 `nerva-tensorflow` requires Python 3.11 or newer. Optional extras:
 
 ```bash
-pip install "nerva-tensorflow[examples]"   # dependencies of the examples (scikit-learn)
+pip install "nerva-tensorflow[examples]"   # scikit-learn, used by examples/train_synthetic.py
 pip install "nerva-tensorflow[test]"       # pytest
 ```
 
